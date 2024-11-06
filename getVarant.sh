@@ -2,10 +2,10 @@
 
 # Set parameters
 Project="gatc"
-dataDir="/home/chenq/reseq.data"
-config="$dataDir/data_info/sample.list"
-refDir="$dataDir/reference/"
-ref="$dataDir/reference/Ppse.genome.fasta"
+data_dir="/home/chenq/reseq.data"
+config="$data_dir/data_info/sample.list"
+ref_dir="$data_dir/reference/"
+ref="$data_dir/reference/Ppse.genome.fasta"
 NCPUS=20
 export start_step=3
 start_sample=1
@@ -19,7 +19,7 @@ echo "Process Log" > "$log_file"
 # samtools faidx $ref
 # picard CreateSequenceDictionary \
 # 	R="$ref" \
-#   O="$refDir/Ppse.genome.dict"
+#   O="$ref_dir/Ppse.genome.dict"
 
 # Function to process each sample
 process_sample() {
@@ -37,10 +37,10 @@ process_sample() {
         return
     fi
 
-    flowcell=$(zcat "$dataDir/samples/$sample/$fq1" | head -1 | cut -c 2-11)
-    lane=$(zcat "$dataDir/samples/$sample/$fq1" | head -1 | cut -c 13)
-    bams="$dataDir/bams/$group"
-    fastq="$dataDir/samples/$sample"
+    flowcell=$(zcat "$data_dir/samples/$sample/$fq1" | head -1 | cut -c 2-11)
+    lane=$(zcat "$data_dir/samples/$sample/$fq1" | head -1 | cut -c 13)
+    bams="$data_dir/bams/$group"
+    fastq="$data_dir/samples/$sample"
     library=1
 
     # Check if the directory exists
